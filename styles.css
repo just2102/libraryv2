@@ -10,15 +10,20 @@ fieldset #read, fieldset #notread {
     align-self:flex-start;
 }
 #library {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr))
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    justify-items: center;
 }
 
 
 #card {
-    border:solid 3px;
-    width:25vw;
-    height:40vh;
+    width:150px;
+    height:280px;
+    border: solid 3px;
+    display:grid;
+    grid-template-rows: 2fr 2fr 2fr 2fr 1fr;
+    justify-items: stretch;
+    align-items: center;
 
 }
 /* card content */

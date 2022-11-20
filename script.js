@@ -95,8 +95,8 @@ function createCard(title,author,pages,read,cover) {
         removeButton.innerText  =   'X';
         let changeStatusButton  =   document.createElement('button');
         changeStatusButton.setAttribute('class','change_status_button')
-        changeStatusButton.innerText    =   'Change status'
-
+        changeStatusButton.innerText    =   'Read?'
+//  Appends new card as child of #library and fills it with content (title, author, pages, status, button to change status and to remove card)
         cardField.appendChild(newCard);
 
         newCard.appendChild(cardTitle)
@@ -107,26 +107,56 @@ function createCard(title,author,pages,read,cover) {
         newCard.appendChild(cardRead);
         newCard.appendChild(changeStatusButton)
         newCard.appendChild(removeButton)
-        
+
+        let removeBtn    =   document.querySelectorAll('.remove_button');
+        removeBtn.forEach(button => {
+            button.addEventListener('click', function handleClick(event) {
+                for (let i =0; i<library.length;i++) {
+                    if (library[i]._title==button.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.innerText) {
+                        library.splice(i,1);
+                        button.parentElement.remove()
+                    } 
+                }
+            })
+        })
+        let statusBtn  =   document.querySelectorAll('.change_status_button');
+        statusBtn.forEach(button => {
+            button.addEventListener('click', function handleClick(event) {
+                for (let i=0;i<library.length;i++) {
+                    if (library[i]._title==button.previousSibling.previousSibling.previousSibling.previousSibling.innerText) {
+                        let currentBook =   library[i];
+                        currentBook.toggleStatus()
+                        button.previousSibling.innerText    =   currentBook._read;
+                    }
+                }
+            })
+        })
     }
 //  Executes when user presses the '+' button
 function addBook(title,author,pages,read,cover) {
+ 
     title   =   document.getElementById('title')
     author  =   document.getElementById('author')
     pages   =   document.getElementById('pages')
     read    =   document.querySelector('input[name="read"]:checked')
-    cover   =   document.getElementById('cover')
-    console.log(read.value);
+    cover   =   document.getElementById('cover')  
+     for (let i = 0; i<library.length;i++) {
+        if (library[i]._title==title.value) {
+            alert('This book is already in your library!')
+            title.value=''
+        } else {
+            break;
+        }
+    }
     library.push(new Books(title.value,author.value,pages.value,read.value,cover.value))
     createCard()
 }
 addButton.addEventListener('click', addBook)
 
 
-// Remove and change status buttons //
-let removeButton    =   document.getElementsByClassName('remove_button')
 
-let changeStatusButton  =   document.getElementsByClassName('change_status_button')
+
+
 
 
 
