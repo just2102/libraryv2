@@ -53,23 +53,27 @@ class Books {
     set cover(value) {
         this._cover  =   value;
     }
+    toggleStatus() {
+        if (this._read  ==  'true') {
+            this._read  =  'false'
+        } else if (this._read=='false') {
+            this._read  =   'true'
+        }
+    }
 }
 
 //  Executes after addBook() to add new card to DOM
-function createCard(title,author,pages,read,img) {
-    for (let i = library.length-1;i>=0;i--) {
-        title   =   library[i].title;
-        author  =   library[i].author;
-        pages   =   library[i].pages;
-        read    =   library[i].read;
-        img     =   library[i].cover;
-        console.log(img)
-    }
+function createCard(title,author,pages,read,cover) {
+        title   =   library[library.length-1].title;
+        author  =   library[library.length-1].author;
+        pages   =   library[library.length-1].pages;
+        read    =   library[library.length-1].read;
+        cover   =   library[library.length-1].cover;
         let cardField =   document.getElementById('library');
         let newCard =   document.createElement('div');
         newCard.setAttribute('id','card');
         /* not working */
-        newCard.style.backgroundImage    =   'img';
+        newCard.style.backgroundImage    =   cover;
         /*             */
         let cardTitle   =   document.createElement('h2')
         cardTitle.setAttribute('id','card_title')
@@ -84,13 +88,8 @@ function createCard(title,author,pages,read,img) {
         cardPages.innerText     =   pages;
 
         let cardRead    =   document.createElement('p');
-        if (read=='read') {
-            cardRead.setAttribute('id','card_read')
-            cardRead.innerText  =   read;
-        } else if (read=='notread') {
-            cardRead.setAttribute('id','card_not_read')
-            cardRead.innerText  =   read
-        }
+        cardRead.innerText  =   read 
+
         let removeButton    =   document.createElement('button');
         removeButton.setAttribute('class','remove_button')
         removeButton.innerText  =   'X';
@@ -103,24 +102,32 @@ function createCard(title,author,pages,read,img) {
         newCard.appendChild(cardTitle)
         newCard.appendChild(cardAuthor)
         newCard.appendChild(cardPages)
+        
+        
         newCard.appendChild(cardRead);
-
-        newCard.appendChild(removeButton)
         newCard.appendChild(changeStatusButton)
+        newCard.appendChild(removeButton)
+        
     }
 //  Executes when user presses the '+' button
-function addBook(title,author,pages,read, cover) {
+function addBook(title,author,pages,read,cover) {
     title   =   document.getElementById('title')
     author  =   document.getElementById('author')
     pages   =   document.getElementById('pages')
     read    =   document.querySelector('input[name="read"]:checked')
     cover   =   document.getElementById('cover')
+    console.log(read.value);
     library.push(new Books(title.value,author.value,pages.value,read.value,cover.value))
     createCard()
 }
 addButton.addEventListener('click', addBook)
 
-let harryPotter =   new Books ('Harry Potter','Pidrik',300,true)
+
+// Remove and change status buttons //
+let removeButton    =   document.getElementsByClassName('remove_button')
+
+let changeStatusButton  =   document.getElementsByClassName('change_status_button')
+
 
 
 
