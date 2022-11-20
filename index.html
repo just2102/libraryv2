@@ -16,15 +16,21 @@
         <label for="author">Author:</label>
         <input type="text" id="author" name="author" placeholder="Author...">
         <label for="pages">Pages:</label>
-        <input type="num" id="pages" name="pages" placeholder="Number of pages...">
+        <input type="number" id="pages" name="pages" placeholder="Number of pages...">
         <fieldset>
             <legend>Have you read it?</legend>        
             <label for="read">Read</label>
             <input type="radio" id="read" name="read" value="read">
+            <label for="notread">Not yet</label>
             <input type="radio" id="notread" name="read" value="notread">
+            <label for="cover">Upload cover...</label>
+            <input type="file" id="cover" name="cover">
         </fieldset>
     <button id="add_book" type="button">Add book</button>
     </form>
-    
+
+    <div id="library">
+
+    </div>
 </body>
 </html>

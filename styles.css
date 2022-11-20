@@ -1,3 +1,49 @@
 #form {
     display:none;
 }
+
+fieldset {
+    display:flex;
+    flex-direction: column;
+}
+fieldset #read, fieldset #notread {
+    align-self:flex-start;
+}
+#library {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr))
+}
+
+
+#card {
+    border:solid 3px;
+    width:25vw;
+    height:40vh;
+
+}
+/* card content */
+#card_title {
+    font-weight: bolder;
+    color:steelblue;
+}
+#card_author {
+    font-weight:bold;
+    color:rgb(43, 94, 94);
+}
+#card_pages {
+    color:aqua;
+}
+
+#card_read {
+    color:green;
+}
+#card_not_read {
+    color:black;
+}
+
+.remove_button {
+    background: red;
+}
+.change_status_button {
+    background: yellow;
+}
